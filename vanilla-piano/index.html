@@ -2,9 +2,6 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vanilla Piano</title>
 </head>
 
@@ -12,6 +9,7 @@
     <style>
         html,
         body {
+            background-color:aqua;
             padding: 0;
             margin: 0;
             height: auto;
@@ -165,6 +163,17 @@
 </body>
 
 <script>
+  window.addEventListener("keypress", function(keyPressEvent){
+    const tone = document.querySelector(`audio[data-key="${keyPressEvent.keyCode}"]`);
+    const pianoKey = document.querySelector(`.pianoKey[data-key="${keyPressEvent.keyCode}"]`);
+    if (!tone) return;
+    tone.currentTime = 0;
+    pianoKey.classList.add("pressed");
+    tone.play();
+    setTimeout(function(){
+        pianoKey.classList.remove("pressed");
+    }, 300)
+  })
 </script>
 
 </html>
